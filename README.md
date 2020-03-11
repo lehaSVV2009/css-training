@@ -378,6 +378,10 @@ Pause animation
 ### Print `css is awesome` with caret animation
 
 ```
+<div class="typing">css is awesome</div>
+
+document.getElementsByClassName('typing')[0].classList.add('visible');
+
 .typing {
   width: 0;
   white-space: nowrap;
