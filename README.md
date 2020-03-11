@@ -215,7 +215,7 @@ Transition shorthand:
 
 ## Keyframes
 
-Allow to create your own animations
+When transition and transform are not enough keyframes can help. They allow to create your own animations.
 
 ```
 @keyframes animationName {
