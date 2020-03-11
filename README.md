@@ -115,7 +115,7 @@ e.g. rotate element using top-left point as a center:
 }
 ```
 
-## 3D transforms
+### 3D transforms
 
 Required for 3d
 ```
@@ -139,7 +139,7 @@ scale3d(1, 1.5, 2);
 matrix3d(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p)
 ```
 
-### Perspective
+### 3d perspective
 
 Perspective - distance from user's eye to object surface
 
@@ -157,7 +157,7 @@ perspective-origin: 0 0; // eye seems to be on left top point;
 perspective-origin: 50% 0; // eye seems to be on center top point;
 ```
 
-### backface-visibility
+### 3d backface-visibility
 
 Defines visibility of back side in 3d object.
 
@@ -262,6 +262,166 @@ Transition shorthand:
   transition: all .5s;
 }
 
+```
+
+## Keyframes
+
+Allow to create your own animations
+
+```
+@keyframes animationName {
+  from {
+    /* css properties of the 1st frame */
+  }
+  to {
+    /* css properties of the 2nd frame */
+  }
+}
+```
+
+Simple example:
+
+```
+.box {
+  opacity: 0;
+}
+.box.visible {
+  animation-name: show;
+  animation-duration: 2s;
+}
+
+@keyframes show {
+  to {
+    opacity: 1;
+  }
+}
+```
+
+*It makes sense to has property same as property in `to`*
+
+Blink example:
+
+```
+.box:hover {
+  animation-name: blink;
+  animation-duration: 2s;
+}
+@keyframes blink {
+  0% {  // 0% is the same as from;
+    background-color: blue;
+  }
+  50% {
+    background-color: red;
+  }
+  100% { // 100% is the same as to;
+    background-color: green;
+  }
+}
+```
+
+Ease in-out with delay:
+
+```
+.box:hover {
+  animation-name: show;
+  animation-duration: 4s;
+  animation-delay: 1s;
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+    background-color: blue;
+  }
+  25%, 75% {
+    background-color: green;
+  }
+  100% {
+    opacity: 1;
+    background-color: grey;
+  }
+}
+```
+
+Change timing function in animation:
+
+```
+.box.move {
+  animation-name: move;
+  animation-duration: 8s;
+  animation-timing-function: ease-in;
+}
+
+@keyframes move {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(100%, 0);
+    animation-timing-function: linear;
+  }
+  50% {
+    transform: translate(100%; 200%);
+  }
+  75% {
+    transform: translate(0, 200%);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+```
+
+```
+animation-iteration-count: 3; // animation will be repeated 3 times;
+```
+
+Clocks animation:
+
+```
+.seconds {
+  animation-name: seconds;
+  animation-duration: 60s;
+  animation-iteration-count: infinite;
+}
+```
+
+Fix jumps
+
+```
+animation-direction: alternate;
+animation-fill-mode: forwards;
+```
+
+Shorthands
+
+```
+.long {
+  animation-name: scale;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 3;
+  animation-direction: alternate;
+  animation-delay: 5s;
+  animation-fill-mode: forwards;
+}
+.short {
+  animation: scale 2s ease-in-out 3 alternate 5s forwards;
+}
+.multi-short {
+  animation: scale 2s linear, move 2s ease-out;
+}
+```
+
+Pause animation
+
+```
+.heart {
+  animation: heartBeat 1s ease infinite;
+}
+.heart:hover {
+  animation-play-state: paused;
+}
 ```
 
 ## FAQ
