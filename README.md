@@ -4,12 +4,12 @@
 
 * [Animation](#animation)
 
-# Animation
+## Animation
 
 
 ## FAQ
 
 
-# References
+## References
 
 * HTML/CSS/JS course in russian - https://www.coursera.org/specializations/razrabotka-interfeysov?#courses
