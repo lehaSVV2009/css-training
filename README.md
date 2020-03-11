@@ -115,57 +115,6 @@ e.g. rotate element using top-left point as a center:
 }
 ```
 
-### 3D transforms
-
-Required for 3d
-```
-transform-style: preserve-3d # flat by default;
-```
-
-```
-rotateX(360deg);
-rotateY(360deg);
-rotateZ(360deg);
-rotate3d(1, 1, 1, 180deg); // x, y, z, angle;
-
-translateX(100%)
-translateY(200px);
-translateZ(100%)
-translate3d(10px, 100%, 20px);
-
-scale(2);
-scale3d(1, 1.5, 2);
-
-matrix3d(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p)
-```
-
-### 3d perspective
-
-Perspective - distance from user's eye to object surface
-
-```
-perspective: none; // object seems flat;
-perspective: 200; // object is far;
-perspective: 400; // object is too far;
-```
-
-Perspective origin is point where user's eye is potentially located
-
-```
-perspective-origin: 50% 50%; // default;
-perspective-origin: 0 0; // eye seems to be on left top point;
-perspective-origin: 50% 0; // eye seems to be on center top point;
-```
-
-### 3d backface-visibility
-
-Defines visibility of back side in 3d object.
-
-```
-backface-visibility: visible;
-backface-visibility: hidden;
-```
-
 ## Transitions
 
 Transition - an animation from one set of css properties to another.
@@ -423,6 +372,121 @@ Pause animation
   animation-play-state: paused;
 }
 ```
+
+## Animation Examples
+
+### Print `css is awesome` with caret animation
+
+```
+.typing {
+  width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 1px solid;
+}
+.typing.visible {
+  animation: caret 1s steps(1) infinite,
+             typing 4s steps(15) forwards;
+}
+@keyframes caret { 50% { border-color: transparent; } }
+@keyframes typing { to { width: 15ch; } }
+```
+
+### Spin circle
+
+Small circle is inside big circle, on top of it. Rotate big circle without rotating small circle inside.
+
+1. Locate image in the center of circle
+2. Rotate small circle (it changes coordinate system) -> move small circle to large circle border with translate -> rotate small circle back.
+
+```
+<div class="circle"><img src="cat"></div>
+
+.circle.run img {
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0turn)
+               translateY(-150px)
+               rotate(1turn)
+  }
+  100% {
+    transform: rotate(1turn)
+               translateY(-150px)
+               rotate(0turn)
+  }
+}
+```
+
+### block !important
+
+```
+<div class="box box-overwrite" style="background: #fff !important;"></div>
+
+.box-overwrite {
+  animation: break-style 1s infinite;
+}
+@keyframes break-style {
+  from { background: red }
+  to { background: red }
+}
+```
+
+## 3D
+
+### transforms
+
+Required for 3d
+```
+transform-style: preserve-3d # flat by default;
+```
+
+```
+rotateX(360deg);
+rotateY(360deg);
+rotateZ(360deg);
+rotate3d(1, 1, 1, 180deg); // x, y, z, angle;
+
+translateX(100%)
+translateY(200px);
+translateZ(100%)
+translate3d(10px, 100%, 20px);
+
+scale(2);
+scale3d(1, 1.5, 2);
+
+matrix3d(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p)
+```
+
+### perspective
+
+Perspective - distance from user's eye to object surface
+
+```
+perspective: none; // object seems flat;
+perspective: 200; // object is far;
+perspective: 400; // object is too far;
+```
+
+Perspective origin is point where user's eye is potentially located
+
+```
+perspective-origin: 50% 50%; // default;
+perspective-origin: 0 0; // eye seems to be on left top point;
+perspective-origin: 50% 0; // eye seems to be on center top point;
+```
+
+### backface-visibility
+
+Defines visibility of back side in 3d object.
+
+```
+backface-visibility: visible;
+backface-visibility: hidden;
+```
+
 
 ## FAQ
 
