@@ -24,7 +24,34 @@ Position of box is calculated by:
 * Inner proptions (images, videos with size metadata inside)
 * Position scheme (static, float, absolute, ...)
 
+## Box types
 
+### block
+
+Wrap element with endlines.
+
+```
+display: block
+```
+
+Block elements:
+* p
+* div
+* h1-h6
+* ol
+* ul
+* form
+* hr
+* table
+* display: block, list-item, table, flex...
+* ...
+
+By default, 
+
+```
+width = margin-left + border-left + padding-left + content-width + padding-right + border-right + margin-right 
+heigth != margin-top + border-top + padding-top + content-height + padding-bottom + border-bottom + margin-bottom 
+```
 
 # Animation
 
