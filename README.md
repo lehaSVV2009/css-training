@@ -2,7 +2,29 @@
 
 [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets) Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML.
 
+* [Display model](#display-model)
 * [Animation](#animation)
+
+# Display model
+
+All is squares (boxes).
+
+Square consists of:
+
+* `content`
+* `padding`
+* `border`
+* `margin`
+
+Position of box is calculated by:
+* Size of the box (defined, limited, not defined)
+* Box type (inline, block, ...)
+* Position relative to neighbours and parents/children
+* Size of viewport (browser size)
+* Inner proptions (images, videos with size metadata inside)
+* Position scheme (static, float, absolute, ...)
+
+
 
 # Animation
 
