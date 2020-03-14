@@ -53,6 +53,22 @@ width = margin-left + border-left + padding-left + content-width + padding-right
 heigth != margin-top + border-top + padding-top + content-height + padding-bottom + border-bottom + margin-bottom 
 ```
 
+Percent values:
+* width: 10%; means 10% of full element width
+* heigth: 10; means 10% of full element height, but only if it is defined!
+* margin-left: 10%; or padding-right: 10%; means 10% of full element width
+* margin-top: 10%; or padding-bottom: 10%; means 10% of full element WIDTH!
+
+Custom border example:
+
+```
+div {
+  border-width: 20px 40px;
+  border-style: solid dashed dotted;
+  border-color: blue red;
+}
+```
+
 # Animation
 
 ## Transforms
