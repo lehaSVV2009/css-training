@@ -3,6 +3,7 @@
 [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets) Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML.
 
 * [Display model](#display-model)
+* [Position](#position)
 * [Animation](#animation)
 
 # Display model
@@ -44,11 +45,13 @@ Block elements:
 * display: block, list-item, table, flex...
 * ...
 
+Containing block - square that is used to calculate position and sizes of element/elements.
+
 By default (if `box-sizing: content-box`)
 
 ```
-width = margin-left + border-left + padding-left + content-width + padding-right + border-right + margin-right 
-heigth != margin-top + border-top + padding-top + content-height + padding-bottom + border-bottom + margin-bottom 
+containing block width = margin-left + border-left + padding-left + content-width + padding-right + border-right + margin-right 
+containing block heigth != margin-top + border-top + padding-top + content-height + padding-bottom + border-bottom + margin-bottom 
 ```
 
 Percent values:
@@ -171,6 +174,109 @@ Block elements:
 * label
 * textarea
 * display: inline, inline-block, inline-table
+
+
+# Position
+
+* static - default
+* relative
+* absolute
+* fixed
+* sticky
+
+
+## static
+
+One by one, left to right, top to bottom
+
+```
+position: static
+```
+
+## relative
+
+Position is moved relatively to its current position. Move can be done via `top`, `left`, `right` or `bottom` properties (with positive/negative/percent values).
+
+```
+position: relative
+```
+
+In left to right text direction (`direction: ltr`) left is prioritized to right:
+
+```
+.foo {
+  position: relative;
+  right: -20px;
+  left: -20px;
+}
+```
+
+Top has always greater priority than bottom:
+
+```
+.bar {
+  position: relative;
+  top: 10px;
+  bottom: 10px;
+}
+```
+
+Percent value for `left` and `right` (`left: 50%`) is calculated from parent width.
+Percent value for `top` and `bottom` (`top: 10%`) is calculated from parent height only if it is explicitly defined!
+
+Containing block for root element (body) is a viewport.
+For static and relative containing block is nearest parent.
+Relative block creates new containing block inside.
+
+## absolute
+
+Position is moved absolutely on page via `top`, `left`, `right`, `bottom` properties.
+Containing block for absolute elements is nearest parent with NON-STATIC position (or root element, if non-static not found).
+
+```
+position: absolute
+```
+
+Box on top left of page:
+
+```
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+```
+
+Box on top left of parent element:
+
+```
+<div class="parent"><div class="absolute">Test</div></div>
+
+.parent {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+```
+
+## fixed
+
+Same as absolute, but positioned relatively to viewport (not changed when scroll down/up).
+
+```
+position: fixed;
+```
+
+## sticky
+
+Same as relative, until special border. After border it works as position fixed.
+
+```
+position: sticky;
+```
 
 # Animation
 
