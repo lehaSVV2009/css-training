@@ -24,9 +24,7 @@ Position of box is calculated by:
 * Inner proptions (images, videos with size metadata inside)
 * Position scheme (static, float, absolute, ...)
 
-## Box types
-
-### block
+## Display block
 
 Wrap element with endlines.
 
@@ -141,6 +139,38 @@ Inner width is 866px, `margin-left` is 0, `margin-right` is 0:
 Top and bottom margins of neighbour elements are sometimes collapsed into a single margin that is equal to the largest of the two margins.
 
 This does not happen on left and right margins! Only top and bottom margins!
+
+## Display inline
+
+Renders as a line with no endlines.
+
+```
+display: inline
+```
+
+Specifities:
+
+* No reactions on `height` or `width` props
+* No reactions on `margin-top` or `margin-bottom`
+* `padding` doesn't change containing block height
+
+P.S. `inline-block` has no such specifities.
+
+Block elements:
+* span
+* b
+* i
+* em
+* strong
+* a
+* br
+* img
+* button
+* input
+* select
+* label
+* textarea
+* display: inline, inline-block, inline-table
 
 # Animation
 
