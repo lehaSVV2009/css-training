@@ -278,6 +278,42 @@ Same as relative, until special border. After border it works as position fixed.
 position: sticky;
 ```
 
+# Stacking context
+
+Order of elements overlay:
+
+1. Background and border
+2. Non-static element with `z-index < 0`
+3. `display: block`
+4. floating elements
+5. `display: inline`
+6. Non-static element with `z-index: 0;` or `z-index: auto`, opacity < 1.
+7. Non-static element with `z-index` > 0
+
+
+Red is higher because it's non-static element with `z-index: auto`. Next is green (because last is higher) and blue is the lowest.
+
+```
+<div class="red" />
+<div class="blue" />
+<div class="green" />
+
+.red {
+  position: relative;
+}
+```
+
+### z-index hell
+
+Too many z-indexes..
+
+Structure to fix:
+
+* 1000-1999 - header
+* 2000-2999 - dialog
+* 3000-3999 - popup
+* 4000-4999 - suggest
+
 # Animation
 
 ## Transforms
