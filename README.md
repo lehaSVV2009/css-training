@@ -46,7 +46,7 @@ Block elements:
 * display: block, list-item, table, flex...
 * ...
 
-By default, 
+By default (if `box-sizing: content-box`)
 
 ```
 width = margin-left + border-left + padding-left + content-width + padding-right + border-right + margin-right 
@@ -54,10 +54,10 @@ heigth != margin-top + border-top + padding-top + content-height + padding-botto
 ```
 
 Percent values:
-* width: 10%; means 10% of full element width
-* heigth: 10; means 10% of full element height, but only if it is defined!
-* margin-left: 10%; or padding-right: 10%; means 10% of full element width
-* margin-top: 10%; or padding-bottom: 10%; means 10% of full element WIDTH!
+* width: 10%; means 10% of containing block width
+* heigth: 10; means 10% of containing block height, but only if it is explicitly defined!
+* margin-left: 10%; or padding-right: 10%; means 10% of containing block width
+* margin-top: 10%; or padding-bottom: 10%; means 10% of containing block WIDTH!
 
 Custom border example:
 
@@ -68,6 +68,79 @@ div {
   border-color: blue red;
 }
 ```
+
+### block math
+
+margin + width = containing block width - border - padding
+
+Inner width is 666px:
+
+```
+.wrapper { width: 666px };
+.inner { };
+```
+
+Inner width is 166px, `margin-right` is 0:
+
+```
+.wrapper { width: 666px; }
+.inner { margin-left: 500px; }
+```
+
+Inner width is 66px:
+
+```
+.wrapper { width: 666px; }
+.inner { margin-left: 500px; margin-right: 100px; }
+```
+
+`margin-left` is 0, `margin-right` is 566px:
+
+```
+.wrapper { width: 666px; }
+.inner { width: 100px; }
+```
+
+`margin-left` is 0, `margin-right is 566px`:
+
+```
+.wrapper { width: 666px; }
+.inner { width: 100px; margin-right: 0; }
+```
+
+`margin-left` is 566px, `margin-right` is 0:
+
+```
+.wrapper { width: 666px; }
+.inner { width: 100px; margin-left: auto; }
+```
+
+`margin-left` is 283px, `margin-left` is 283px;
+
+```
+.wrapper { width: 666px; }
+.inner { width: 100px, margin: 0 auto; }
+```
+
+Inner width is 766px, `margin-left` is 0, `margin-right` is 0:
+
+```
+.wrapper { width: 666px };
+.inner { margin-right: -100px; }
+```
+
+Inner width is 866px, `margin-left` is 0, `margin-right` is 0:
+
+```
+.wrapper { width: 666px };
+.inner { margin-left: -100px; margin-right: -100px; }
+```
+
+### margin collapse
+
+Top and bottom margins of neighbour elements are sometimes collapsed into a single margin that is equal to the largest of the two margins.
+
+This does not happen on left and right margins! Only top and bottom margins!
 
 # Animation
 
