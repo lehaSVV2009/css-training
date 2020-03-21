@@ -4,6 +4,7 @@
 
 * [Display model](#display-model)
 * [Position](#position)
+* [Floating elements](#floating-elements)
 * [Animation](#animation)
 
 # Display model
@@ -313,6 +314,157 @@ Structure to fix:
 * 2000-2999 - dialog
 * 3000-3999 - popup
 * 4000-4999 - suggest
+
+# Floating elements
+
+* Element is out of static flow and moves to right/left until either parent padding or another floating element.
+* Inline elements know about floating elements and wrap around them. Block elements don't react on floating elements.
+* Floating elements width is determined by its content
+* Floating elements margins don't collapse
+
+```
+.box {
+  /* float: left | right | none */
+  float: left;
+}
+```
+
+`float-left` is on left side, middle text is on right side of `float-left`, `float-right` is on the right side of middle text:
+
+```
+<div>
+  <div class="float-left">Left</div>
+  Blabla too large text
+  <div class="float-right">Right</div>
+</div>
+
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+```
+
+Put block element `box-2` right under `float-left` (force block element to react on floating element):
+
+```
+<div class="box-1">
+  <div class="float-left">Left</div>
+  Text
+</div>
+<div class="box-2">Bla</div>
+
+.float-left {
+  float: left;
+}
+
+.box-2 {
+  clear: left;
+}
+```
+
+Put block element `box-2` right under `float-left` or `float-right` (under the element which height is bigger):
+
+```
+<div class="box-1">
+  <div class="float-left">Left</div>
+  Text
+  <div class="float-right">Right but it's higher than left</div>
+</div>
+<div class="box-2">Bla</div>
+
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+
+.box-2 {
+  clear: both;
+}
+```
+
+## Block formatting context
+
+It is a page area, where floating elements interact with each other.
+
+It can be created by:
+* float elements
+* position: absolute | fixed
+* display: inline-block | table-cell | table-captions (non-block elements)
+* block elements with overflow: hidden | auto
+
+`wrapper1` size depends on floating elements size inside:
+
+```
+.wrapper1 {
+  overflow: hidden;
+}
+
+<div class="wrapper1">
+  <div class="float-left"></div>
+  <div class="float-right"></div>
+</div>
+```
+
+`wrapper2` avoids floating elements outside:
+
+```
+.wrapper2 {
+  overflow: hidden;
+}
+
+<div class="wrapper1">
+  <div class="float-left" />
+  <div class="float-right" />
+</div>
+<div class="wrapper2" />
+```
+
+Locate elements horizontally and reverse their order:
+
+```
+<div class="box1" />
+<div class="box2" />
+<div class="box3" />
+<div class="box4" />
+
+.box1, .box2, .box3, .box4 {
+  float: right;
+}
+```
+
+3-layer layout, where center element width is changed with resizing, but left and right - not:
+
+```
+<div class="left" />
+<div class="center" />
+<div class="right" />
+
+.left { float: left; }
+.right { float: right; }
+.center { overflow: hidden; }
+```
+
+Clearfix - force block element to react on inner float element without `overflow: hidden`:
+
+```
+<div class="box">
+  <div class="float-left" />
+</div>
+
+.float-left {
+  float: left;
+  height: 100px;
+}
+.box:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+```
 
 # Animation
 
