@@ -5,6 +5,7 @@
 * [Display model](#display-model)
 * [Position](#position)
 * [Floating elements](#floating-elements)
+* [Flexbox](#flexbox)
 * [Animation](#animation)
 
 # Display model
@@ -465,6 +466,24 @@ Clearfix - force block element to react on inner float element without `overflow
   clear: both;
 }
 ```
+
+# Flexbox
+
+A long time ago layouting was done by `table`. 
+
+Then - `css` and `float`/`inline-block`/`position`/... 
+
+But solution had following problems:
+* hacks like `clearfix`
+* `absolute` position takes element out of the document flow
+* `display: table` - too many css properties
+* spaces in `inline-block`
+
+Then/now - `flexbox`. 
+
+
+
+Now/in future - `grid`.
 
 # Animation
 
