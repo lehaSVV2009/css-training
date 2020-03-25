@@ -481,9 +481,180 @@ But solution had following problems:
 
 Then/now - `flexbox`. 
 
+Flexbox - is a specification that describes a set of rules that allow to control size, order and alignment of elements, free space between elements, etc. 
 
+Finally not a hack.
+
+Features:
+* Elements can shrink and stretch by specified rules
+* Alignment horizontally and vertically
+* No need to order elements in html, css is enough
+* Element can automatically line up in rows/columns taking all space
+* All elements height is adjusted by max height in row
+* Simple
+
+Locate all `div` elements horizontally one by one:
+
+```
+<div class="wrapper">
+  <div>a</div>
+  <div>b</div>
+  <div>c</div>
+  <div>d</div>
+</div>
+
+.wrapper {
+  display: flex;
+}
+```
+
+## Flex direction
+
+```
+flex-direction: row | row-reverse | column | column-reverse;
+```
+
+* `row` - main axis is row from left to right, cross axis is column from top to bottom.
+* `row-reverse` - main axis is row from right to left, cross axis is column from top to bottom.
+* `column` - main axis is column from top to bottom, cross axis is row from left to right
+* `column-reverse` - main axis is column from bottom to top, cross axis is row from left to right.
+
+Locate all `div` elements horizontally reversed one by one:
+
+```
+<div class="wrapper">
+  <div>a</div>
+  <div>b</div>
+  <div>c</div>
+  <div>d</div>
+</div>
+
+.wrapper {
+  display: flex;
+  flex-direction: row-reverse; # 
+}
+```
+
+## Justify content
+
+Alignment of main axis.
+
+```
+justify-conten: flex-start | flex-end | center | space-between | space-around
+```
+
+* `flex-start` - align elements to left side
+* `flex-end` - align elements to right side
+* `center` - align elements to center
+* `space-between` - evenly allocate space between elements
+* `space-around` - evenly allocate space around elements
+
+## Align items
+
+Alignment of cross axis.
+
+```
+align-items: stretch | flex-start | flex-end | center | baseline
+```
+
+* `stretch` - heights of all elements = height of highest element
+* `flex-start` - all elements bottoms are close as possible to their common top border of row
+* `flex-end` - all elements tops are close as possible to their common bottom border of row
+* `center` - all elements are centered vertically
+* `baseline` - same as flex-start, but excluding padding
+
+## Flex wrap
+
+Do something with neighbour elements if their total width is bigger than parent width.
+
+```
+flex-wrap: nowrap | wrap | wrap-reverse
+```
+
+* `nowrap` - do nothing, scroll right, default
+* `wrap` - move elements that don't get into the current row to the next row
+* `wrap-reverse` - move elements that don't get into the current row to the previous row
+
+Flex-flow - combination of `flex-direction` and `flex-wrap`.
+
+## Align-content
+
+Defines how `wrap` or `wrap-reverse` rows how rows will allocate space of flex container.
+
+Doesn't work if flex container has no `height`. 
+
+```
+align-content: stretch | flex-start | flex-end | center | space-between | space-around
+```
+
+* `stretch` - takes all height
+* `flex-start` - close to top of fixed height flex container
+* `flex-end` - close to bottom of fixed height flex container
+* `center` - close to center of fixed height flex container
+
+## Flex children properties
+
+`align-self` - apply `align-items`, but for single specific element.
+
+```
+align-self: streched | flex-start | flex-end | center | space-between | space-around
+```
+
+`flex-basis` - set initial width of flex child. It's just basis width, so if width is too large for current row, it will take max possible width, but less that defined width.
+
+```
+flex-basis: 200px | 1000px | ...
+```
+
+`flex-grow` - how bigger current element might be than neigbours within this row.
+
+Here element `B`  will take all free space in the row:
+
+```
+<div class="flex">
+  <div>A</div>
+  <div class="flex-grow">B</div>
+  <div>C</div>
+</div>
+
+.flex { display: flex }
+.flex-grow { flex-grow: 2 }
+```
+
+Here all elements will take approximately same width within row:
+
+```
+<div class="flex">
+  <div class="flex-grow">A</div>
+  <div class="flex-grow">B</div>
+  <div class="flex-grow">C</div>
+</div>
+
+.flex { display: flex }
+.flex-grow { flex-grow: 2 }
+```
+
+Here element `B` will take 2 times bigger width than other elements:
+
+```
+<div class="flex">
+  <div class="flex-grow">A</div>
+  <div class="flex-grow-large">B</div>
+  <div class="flex-grow">C</div>
+</div>
+
+.flex { display: flex }
+.flex-grow { flex-grow: 2 }
+.flex-grow-large { flex-grow: 4 }
+```
+
+`flex-shrink` - how smaller current element might be than neigbours within this row. 
+
+e.g. `flex-shrink: 0` means that element will not be smaller than others (will take all other free space).
 
 Now/in future - `grid`.
+
+`order` - detects order of elements in flex row. By default all elements have `order: 0`, so `order: 1` or `order: 2` will move element to the right side.
 
 # Animation
 
