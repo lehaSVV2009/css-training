@@ -6,6 +6,7 @@
 * [Position](#position)
 * [Floating elements](#floating-elements)
 * [Flexbox](#flexbox)
+* [Grid layout](#grid-layout)
 * [Animation](#animation)
 
 # Display model
@@ -652,9 +653,98 @@ Here element `B` will take 2 times bigger width than other elements:
 
 e.g. `flex-shrink: 0` means that element will not be smaller than others (will take all other free space).
 
-Now/in future - `grid`.
-
 `order` - detects order of elements in flex row. By default all elements have `order: 0`, so `order: 1` or `order: 2` will move element to the right side.
+
+# Grid layout
+
+Flexbox disadvantages:
+
+* No control of vertical elements
+* Order of elements requires preliminary agreements
+
+Grid - set of intersecting vertical and horizontal lines that divide container into zones where elements are located.
+
+Grid consists of rows and columns.
+
+Example (3 rows and 5 columns):
+
+```
+.layout {
+  display: grid;
+  
+  grid-template-columns: 100px 10px 100px 10px 100px;
+  grid-tempalte-rows: 20px 10px 30px;
+}
+```
+
+Example of grid that adjusts itself by content:
+
+```
+.layout {
+  display: grid;
+  
+  grid-template-columns: 100px 1fr 100px 2fr 100px;
+  grid-tempalte-rows: auto 10px auto;
+}
+```
+
+`fr` - flex-factor. `2fr` will always be 2 times bigger than `1fr`.
+
+Grid Example 1:
+
+```
+<div class="wrapper">
+  <div class="a">a</div>
+  <div class="b">a</div>
+  <div class="c">a</div>
+  <div class="d">a</div>
+  <div class="e">a</div>
+  <div class="f">a</div>
+<div/>
+
+.a {
+  grid-column-start: 1; # starts in left border of 1st column (from 1, but not 0!)
+  grid-column-end: 2; # ends in left border of 2nd column
+  
+  grid-row-start: 1; # starts in top border of 1st column 
+  grid-row-end: 2; # end in top border of 2nd column 
+}
+
+.b {
+  grid-column-start: 3;
+  grid-column-end: 6; # border of last + 1 not existing column
+  
+  grid-row-start: 3;
+  grid-row-end: 4;
+  
+  # OR
+  
+  grid-column: 3 / 6;
+  grid-row: 3 / 4;
+  
+  # OR
+  
+  grid-area: 3 / 3 / 4 / 6;
+}
+```
+
+Grid Example 2 (template):
+
+```
+.layout {
+  display: grid;
+  grid-template-columns: 100px 1f 100px 2fr 100px;
+  grid-template-rows: auto 10px auto;
+  
+  grid-template-areas: "h h h h h"
+  "a b b b c"
+  "d d d e e"
+}
+
+.a {
+  grid-area: h;
+}
+```
 
 # Animation
 
